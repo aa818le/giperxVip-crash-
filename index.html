@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GiperX crash Script</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+      font-family: Arial, sans-serif;
+      color: white;
+      position: relative;
+    }
+
+    #pageLogo {
+      width: 150px;
+      height: 150px;
+      background-image: url('logo.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-bottom: 20px;
+    }
+
+    .login-container {
+      text-align: center;
+      padding: 30px 20px;
+      border-radius: 15px;
+      border: 2px solid #4caf50;
+      background-color: transparent;
+      color: white;
+      width: 100%;
+      max-width: 350px;
+      box-sizing: border-box;
+      position: relative;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+    }
+
+    .login-container h2 {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"].code {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background-color: #555;
+      color: white;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      margin-right: 5px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .linebet { color: green; font-weight: bold; }
+    .xbet { color: lightblue; font-weight: bold; }
+    .melbet { color: yellow; font-weight: bold; }
+    .megapari { color: green; font-weight: bold; }
+    .starz { color: red; font-weight: bold; }
+    .betwinner { color: yellow; font-weight: bold; }
+
+    .icon-container {
+      margin-top: 20px;
+    }
+
+    .icon-container a {
+      color: #fff;
+      font-size: 24px;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .icon-container a:hover {
+      color: #4caf50;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      margin-top: auto;
+      padding: 20px 0;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: #000;
+    }
+
+    .social-icons a {
+      margin: 0 15px;
+      font-size: 30px;
+      color: #fff;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #4caf50;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Logo -->
+  <div id="pageLogo"></div>
+
+  <!-- Login Box -->
+  <div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="text" class="code" id="activationCode" placeholder="Enter activation code" required>
+      
+      <div id="err" style="display:none; margin:10px 0; color:red;">
+        Error activation code
+      </div>
+
+      <div class="row">
+        <label class="checkbox-label">
+          <input type="checkbox" name="bet_option" onclick="selectOnlyThis(this)">
+          <span class="linebet">LINEBET</span>
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" name="bet_option" onclick="selectOnlyThis(this)" checked>
+          <span class="xbet">1XBET</span>
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" name="bet_option" onclick="selectOnlyThis(this)">
+          <span class="melbet">MELBET</span>
+        </label>
+      </div>
+
+      <div class="row">
+        <label class="checkbox-label">
+          <input type="checkbox" name="bet_option" onclick="selectOnlyThis(this)">
+          <span class="megapari">MEGAPARI</span>
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" name="bet_option" onclick="selectOnlyThis(this)">
+          <span class="starz">888STARZ</span>
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" name="bet_option" onclick="selectOnlyThis(this)">
+          <span class="betwinner">BETWINNER</span>
+        </label>
+      </div>
+
+      <input type="submit" value="Confirm">
+    </form>
+
+    <div class="icon-container">
+      <a href="https://t.me/appleking077s" target="_blank" title="Join Telegram"><i class="fab fa-telegram"></i></a>
+      <a href="https://t.me/appleking077s" target="_blank" title="Buy Activation Code"><i class="fas fa-shopping-cart"></i></a>
+    </div>
+  </div>
+
+  <div class="social-icons">
+    <a href="https://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+  </div>
+
+  <!-- Firebase SDK (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-database-compat.js"></script>
+
+  <script>
+    //  
+    const firebaseConfig = {
+      apiKey: "AIzaSyB1_XCbC777hKwxlilhMeq5Hpty1dvDT1I",
+      authDomain: "giper-8fd92.firebaseapp.com",
+      databaseURL: "https://giper-8fd92-default-rtdb.firebaseio.com",
+      projectId: "giper-8fd92",
+      storageBucket: "giper-8fd92.firebasestorage.app",
+      messagingSenderId: "485740337398",
+      appId: "1:485740337398:web:ab901fd4f28219ea5834d7"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Form submit
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const code = document.getElementById("activationCode").value.trim();
+      const errEl = document.getElementById("err");
+      errEl.style.display = "none";
+
+      if (!code) return;
+
+      try {
+        const snap = await db.ref("users/" + code).get();
+        if (snap.exists()) {
+          localStorage.setItem("activationCode", code);
+          window.location.href = "https://1x-giper-crash.vercel.app/"; // success page
+        } else {
+          errEl.style.display = "block";
+        }
+      } catch (err) {
+        console.error(err);
+        errEl.style.display = "block";
+      }
+    });
+
+    // Checkbox selection (only one allowed)
+    function selectOnlyThis(checkbox) {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach((item) => {
+        if (item !== checkbox) item.checked = false;
+      });
+    }
+  </script>
+</body>
+</html>
