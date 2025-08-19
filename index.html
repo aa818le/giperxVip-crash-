@@ -229,7 +229,7 @@
         const snap = await db.ref("users/" + code).get();
         if (snap.exists()) {
           localStorage.setItem("activationCode", code);
-          window.location.href = "https://1x-giper-crash.vercel.app/"; // success page
+          window.location.href = "https://giperxhack-crashpredict.vercel.app/"; // success page
         } else {
           errEl.style.display = "block";
         }
